@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Searchbar } from "components/Searchbar";
+import { Loader } from "components/Loader";
+import { ImageGallery } from "components/ImageGallery";
+import { Button } from "components/Button";
+import { Modal } from "components/Modal";
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '34354897-5c7498590c159fab15c37271f';
@@ -21,11 +25,23 @@ const searchParams = new URLSearchParams({  //TODO:
 *largeImageURL - посилання на велике зображення для модального вікна */
 
 export class App extends Component {
+  state = {
+    isModalVisible: false,
+    gallery:[],
+  }
 
-  render () {
-  return (
-    <div>
+  onSubmit = () => {
+//TODO:
+  }
 
-    </div>
-  );}
+  render() {
+    return (
+      <>
+        <Searchbar onSubmit={this.onSubmit} />
+        <Loader isVisible={true} />
+        <ImageGallery gallery={this.state.gallery}></ImageGallery>
+        <Button />
+        {this.state.isModalVisible && <Modal />}
+      </>)
+  }
 };

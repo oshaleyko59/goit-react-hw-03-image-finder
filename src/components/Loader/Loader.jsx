@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Vortex } from 'react-loader-spinner';
 
 /*
@@ -6,14 +7,18 @@ import { Vortex } from 'react-loader-spinner';
 наприклад react-loader-spinner або будь-який інший.
  */
 
-export const Loader = () => (
+export const Loader = ({isVisible}) => (
   <Vortex
-    visible={true}
-    height="80"
-    width="80"
+    visible={isVisible}
+    height="40"
+    width="40"
     ariaLabel="vortex-loading"
     wrapperStyle={{}}
     wrapperClass="vortex-wrapper"
-    colors={['yellow', 'blue', 'yellow', 'blue', 'yellow', 'blue']}
+    colors={['yellow', 'blue', 'yellow', 'blue', 'blue', 'yellow']}
   />
 );
+
+Loader.propTypes = {
+  isVisible: PropTypes.bool,
+}
