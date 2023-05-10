@@ -41,7 +41,8 @@ export const Button = styled.button`
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center; */
-  opacity: 0.6;
+  background-color: yellow;
+  opacity: 0.3;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;

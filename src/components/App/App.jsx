@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Searchbar } from 'components/Searchbar';
 import { Loader } from 'components/Loader';
-import { ImageGallery } from 'components/ImageGallery';
+//import { ImageGallery } from 'components/ImageGallery';
 import { Button } from 'components/Button';
 import { Modal } from 'components/Modal';
 
-const BASE_URL = 'https://pixabay.com/api/';
-const API_KEY = '34354897-5c7498590c159fab15c37271f';
-const searchParams = new URLSearchParams({
+/* const BASE_URL = 'https://pixabay.com/api/';
+const API_KEY = '34354897-5c7498590c159fab15c37271f'; */
+/* const searchParams = new URLSearchParams({
   //TODO:
   q: 'cat',
   page: 1, //default
@@ -15,7 +15,7 @@ const searchParams = new URLSearchParams({
   image_type: 'photo',
   orientation: 'horizontal',
   per_page: 12,
-});
+}); */
 
 //https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12
 /*
@@ -29,25 +29,27 @@ export class App extends Component {
   state = {
     isModalVisible: false,
     isLoading: false,
-    query: '',
+    que: '',
     gallery: null,
   };
 
-  handleSubmit = (query) => {
-    console.log(query);  //TODO:
-    this.setState({ query });
+  handleSubmit = (que) => {
+    console.log(que);  //TODO:
+    this.setState({ que });
   };
 
   componentDidMount() {
     this.setState({ isLoading: true });
 
-    fetch(
+/*     fetch(
       `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
     )
       .then(res => res.json())
       .then(gallery => this.setState({ gallery }))
-      .catch(console.log).finally(()=> this.setState({isLoading: false}));
+      .catch(console.log).finally(()=> this.setState({isLoading: false})); */
   }
+
+
   /*  <ImageGallery gallery={this.state.gallery} /> */
   render() {
     return (

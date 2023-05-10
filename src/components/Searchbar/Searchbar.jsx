@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Header, Form, Button, Span, Input } from './styled';
 //TODO: import {ImSearch } from 'react-icons/im';
@@ -7,40 +7,42 @@ import { Header, Form, Button, Span, Input } from './styled';
 /* Компонент приймає один проп onSubmit – функцію для передачі
 значення інпута під час сабміту форми */
 
-export class Searchbar extends Component {
+export class Searchbar extends PureComponent {
 
   static propTypes = {
     onSubmit: PropTypes.func,
   };
 
   state = {
-    query: ''
+    value: ''
   };
 
-  handleQueryChange = (e) => {
-    this.setState({ query: e.currentTarget.value.toLowerCase() });
+  handleChange = (e) => {
+//console.log('change Searchbar:', this.state, this.props);
+    this.setState({ value: e.currentTarget.value.toLowerCase() });
   }
 
   handleSubmit = e => {
+    console.log('submit Searchbar:', this.state, this.props);
     e.preventDefault();
-    this.props.onSubmit(this.setState.query);
+    this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
   }
 
   render() {
+    console.log('render Searchbar:', this.state,this.props);
     return (
       <Header>
         <Form>
-          <Button type="submit" onSubmit={this.handleQueryChange}>
+          <Button type="submit" onSubmit={this.handleSubmit}>
             <Span>Search</Span>
           </Button>
           <Input
             type="text"
-            name="query"
-            value={this.state.query}
-            onChange={this.handleQueryChange}
-            autocomplete="off"
-            autoFocus
+
+            value={this.state.value}
+            onChange={this.handleChange}
+
             placeholder="Search images and photos"
           />
         </Form>
@@ -49,7 +51,11 @@ export class Searchbar extends Component {
   }
 }
 
-/* Searchbar.propTypes = {
+/*          name="query"
+            autocomplete="off"
+            autoFocus
+
+Searchbar.propTypes = {
   onSubmit: PropTypes.func,
 };
  */
