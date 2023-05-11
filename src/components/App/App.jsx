@@ -33,7 +33,7 @@ export class App extends Component {
     gallery: null,
   };
 
-  handleSubmit = (que) => {
+  saveQuery = (que) => {
     console.log(que);  //TODO:
     this.setState({ que });
   };
@@ -54,12 +54,9 @@ export class App extends Component {
   render() {
     return (
       <>
-        <Searchbar onSubmit={this.handleSubmit} />
+        <Searchbar onSubmit={this.saveQuery} />
         {this.state.isLoading && <Loader isVisible={true} />}
-        {this.state.gallery && (
-          <div> Galereya</div>
-
-        )}
+        {this.state.gallery && <div> Galereya</div>}
         <Button />
         {this.state.isModalVisible && <Modal />}
       </>

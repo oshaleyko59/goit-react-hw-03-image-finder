@@ -1,13 +1,14 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Header, Form, Button, Span, Input } from './styled';
+import { Header, Form, Input, Span, Button } from './styled';
 //TODO: import {ImSearch } from 'react-icons/im';
+//
 //TODO: import { ReactComponents as MyIcon } from './some.svg';
 
 /* Компонент приймає один проп onSubmit – функцію для передачі
 значення інпута під час сабміту форми */
 
-export class Searchbar extends PureComponent {
+export class Searchbar extends Component {
 
   static propTypes = {
     onSubmit: PropTypes.func,
@@ -22,19 +23,19 @@ export class Searchbar extends PureComponent {
     this.setState({ value: e.currentTarget.value.toLowerCase() });
   }
 
-  handleSubmit = e => {
-    console.log('submit Searchbar:', this.state, this.props);
+  handleSubmit = (e) => {
+    console.log('submit Searchbar:', e);
     e.preventDefault();
-    this.props.onSubmit(this.state.query);
-    this.setState({ query: '' });
+/*     this.props.onSubmit(this.state.value);
+    this.setState({ value: '' }); */
   }
 
   render() {
     console.log('render Searchbar:', this.state,this.props);
     return (
       <Header>
-        <Form>
-          <Button type="submit" onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
+          <Button type="submit">
             <Span>Search</Span>
           </Button>
           <Input
