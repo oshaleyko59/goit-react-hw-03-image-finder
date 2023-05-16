@@ -1,62 +1,61 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-import { Header, Form, Input, Span, Button } from './styled';
-//TODO: import {ImSearch } from 'react-icons/im';
-//
-//TODO: import { ReactComponents as MyIcon } from './some.svg';
+import { Header, Form, Input, Button } from './styled';
+import { ImSearch } from 'react-icons/im';
 
 /* Компонент приймає один проп onSubmit – функцію для передачі
 значення інпута під час сабміту форми */
 
-export class Searchbar extends Component {
+const PLACEHOLDER = 'Search images and photos';
+const QUERY_EMPTY_ERR = 'Your query is empty!';
 
+export class Searchbar extends Component {
   static propTypes = {
-    onSubmit: PropTypes.func,
+    onSubmit: PropTypes.func.isRequired,
   };
 
   state = {
-    value: ''
+    value: '',
   };
 
-  handleChange = (e) => {
-//console.log('change Searchbar:', this.state, this.props);
+  handleChange = e => {
     this.setState({ value: e.currentTarget.value.toLowerCase() });
-  }
+  };
 
-  handleSubmit = (e) => {
-    console.log('submit Searchbar:', e);
+  handleSubmit = e => {
     e.preventDefault();
-/*     this.props.onSubmit(this.state.value);
-    this.setState({ value: '' }); */
-  }
+    const {
+      state,
+      props: { onSubmit },
+    } = this;
+
+    const value = state.value.trim();
+
+    if (value === '') {
+      toast.error(QUERY_EMPTY_ERR);
+      return;
+    }
+
+    onSubmit(value);
+    this.setState({ value: '' });
+  };
 
   render() {
-    console.log('render Searchbar:', this.state,this.props);
     return (
       <Header>
         <Form onSubmit={this.handleSubmit}>
           <Button type="submit">
-            <Span>Search</Span>
+            <ImSearch size="28" />
           </Button>
           <Input
             type="text"
-
             value={this.state.value}
             onChange={this.handleChange}
-
-            placeholder="Search images and photos"
+            placeholder={PLACEHOLDER}
           />
         </Form>
       </Header>
     );
   }
 }
-
-/*          name="query"
-            autocomplete="off"
-            autoFocus
-
-Searchbar.propTypes = {
-  onSubmit: PropTypes.func,
-};
- */

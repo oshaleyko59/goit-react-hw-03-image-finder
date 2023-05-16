@@ -1,15 +1,11 @@
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 import { Overlay, Div } from './styled';
 /*
-Під час кліку на елемент галереї повинно відкриватися
-модальне вікно з темним оверлеєм і відображатися велика
- версія зображення.
- Модальне вікно повинно закриватися по натисканню клавіші
- ESC або по кліку на оверлеї.
-
-Зовнішній вигляд схожий на функціонал цього VanillaJS-плагіна,
-тільки замість білого модального вікна рендериться зображення
-(у прикладі натисніть Run). Анімацію робити не потрібно!
+По кліку на елемент галереї повинно відкриватися модальне вікно
+з темним оверлеєм і відображатися велика  версія зображення.
+ Модальне вікно повинно закриватися по ESC або по кліку на оверлеї.
 
 <div class="overlay">
   <div class="modal">
@@ -18,17 +14,43 @@ import { Overlay, Div } from './styled';
 </div>
 */
 
-export const Modal = ({ src, alt }) => {
-  return (
-    <Overlay>
-      <Div>
-        <img src={src} alt={alt} />
-      </Div>
-    </Overlay>
-  );
-}
+const modalRoot = document.querySelector('#modal-root');
 
-Modal.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired
+export class Modal extends Component {
+  static propTypes = {
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+    closeModal: PropTypes.func.isRequired,
+  };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  onKeyDown = evt => {
+    if (evt.code === 'Escape') this.props.closeModal();
+  };
+
+  onClick = evt => {
+    if (evt.target === evt.currentTarget) {
+      this.props.closeModal();
+    }
+  };
+
+  render() {
+    const { src, alt } = this.props;
+
+    return createPortal(
+      <Overlay onClick={this.onClick}>
+        <Div>
+          <img src={src} alt={alt} />
+        </Div>
+      </Overlay>,
+      modalRoot
+    );
+  }
 }

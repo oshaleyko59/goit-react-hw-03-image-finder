@@ -7,18 +7,21 @@ import { Vortex } from 'react-loader-spinner';
 наприклад react-loader-spinner або будь-який інший.
  */
 
-export const Loader = ({isVisible}) => (
+export const Loader = ({query}) => (
+  <>
   <Vortex
-    visible={isVisible}
+    visible={true}
     height="40"
     width="40"
     ariaLabel="vortex-loading"
     wrapperStyle={{}}
     wrapperClass="vortex-wrapper"
     colors={['yellow', 'blue', 'yellow', 'blue', 'blue', 'yellow']}
-  />
+    />
+    <p>`Loading images for "${query}"...`</p>
+  </>
 );
 
 Loader.propTypes = {
-  isVisible: PropTypes.bool,
+  query: PropTypes.string.isRequired,
 }

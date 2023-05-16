@@ -8,11 +8,11 @@ import { ButtonLm } from "./styled";
  */
 
 export const Button = ({ loadMore }) => (
-  <ButtonLm type='button'>
+  <ButtonLm type='button' onClick={loadMore}>
     Load more
   </ButtonLm>
 )
 
 Button.propTypes = {
-  loadMore: PropTypes.func
+  loadMore: PropTypes.func.isRequired
 }
