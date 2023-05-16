@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Loader } from 'components/Loader';
 import { Button } from 'components/Button';
-import { ImageGalleryItem, Gallery, Img } from './styled';
+import { ImageGalleryItem, Gallery, Img, Div, Err } from './styled';
 import galleryApi from 'services/galleryFetch';
 
 /*
@@ -35,11 +35,6 @@ export class ImageGallery extends Component {
     page: 1,
     totalHits: 0,
   };
-
-  constructor(props) {
-    super(props);
-    this.listRef = React.createRef();
-  }
 
   componentDidUpdate(prevProps, prevState) {
     const { query } = this.props;
@@ -90,12 +85,11 @@ export class ImageGallery extends Component {
   };
 
   render() {
-    const { query } = this.props;
     const { status, gallery, totalHits } = this.state;
 
     return (
-      <div ref={this.listRef}>
-        {status === STATUS.REJECTED && <h3>{this.state.error.message}"</h3>}
+      <Div>
+        {status === STATUS.REJECTED && <Err>{this.state.error.message}"</Err>}
         {status !== STATUS.IDLE && (
           <Gallery>
             {gallery.map(({ id, webformatURL, tags }, index) => {
@@ -112,11 +106,11 @@ export class ImageGallery extends Component {
             })}
           </Gallery>
         )}
-        {status === STATUS.PENDING && <Loader query={query} />}
+        {status === STATUS.PENDING && <Loader />}
         {status === STATUS.RESOLVED && gallery.length < totalHits && (
           <Button loadMore={this.loadMore} />
         )}
-      </div>
+      </Div>
     );
   }
 }

@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
 /* ImageGallery styles */
+export const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+`;
+
 export const Gallery = styled.ul`
   display: grid;
   max-width: calc(100vw - 48px);
@@ -32,4 +39,12 @@ export const Img = styled.img`
     transform: scale(1.03);
     cursor: zoom-in;
   }
+`;
+export const Err = styled.span`
+  margin-top: 38px;
+  margin-left: auto;
+  margin-right: auto;
+  color: red;
+  font-size: 24px;
+  font-weight: 700;
 `;

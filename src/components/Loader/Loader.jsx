@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { Vortex } from 'react-loader-spinner';
 
 /*
@@ -7,21 +6,15 @@ import { Vortex } from 'react-loader-spinner';
 наприклад react-loader-spinner або будь-який інший.
  */
 
-export const Loader = ({query}) => (
-  <>
+export const Loader = () => (
   <Vortex
     visible={true}
-    height="40"
-    width="40"
+    height="80"
+    width="80"
     ariaLabel="vortex-loading"
-    wrapperStyle={{}}
+    wrapperStyle={{ marginLeft: 'auto', marginRight: 'auto' }}
     wrapperClass="vortex-wrapper"
     colors={['yellow', 'blue', 'yellow', 'blue', 'blue', 'yellow']}
-    />
-    <p>`Loading images for "${query}"...`</p>
-  </>
+  />
 );
 
-Loader.propTypes = {
-  query: PropTypes.string.isRequired,
-}
